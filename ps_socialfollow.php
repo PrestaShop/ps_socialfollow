@@ -35,7 +35,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
     public function __construct()
     {
         $this->name = 'ps_socialfollow';
-        $this->version = '1.0.1';
+        $this->version = '1.0.0';
         $this->author = 'PrestaShop';
 
         $this->bootstrap = true;
@@ -43,7 +43,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
 
         $this->displayName = $this->getTranslator()->trans('Social media follow links', array(), 'Modules.SocialFollow.Admin');
         $this->description = $this->getTranslator()->trans('Allows you to add information about your brand\'s social networking accounts.', array(), 'Modules.SocialFollow.Admin');
-        $this->ps_versions_compliancy = array('min' => '1.7.0.0', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
 
     public function install()
@@ -56,6 +56,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             Configuration::updateValue('BLOCKSOCIAL_PINTEREST', '') &&
             Configuration::updateValue('BLOCKSOCIAL_VIMEO', '') &&
             Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', '') &&
+			Configuration::updateValue('BLOCKSOCIAL_LINKEDIN', '') &&
             $this->registerHook('displayFooter'));
     }
 
@@ -70,6 +71,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             Configuration::deleteByName('BLOCKSOCIAL_PINTEREST') &&
             Configuration::deleteByName('BLOCKSOCIAL_VIMEO') &&
             Configuration::deleteByName('BLOCKSOCIAL_INSTAGRAM') &&
+			Configuration::deleteByName('BLOCKSOCIAL_LINKEDIN', '') &&
             parent::uninstall());
     }
 
@@ -86,6 +88,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             Configuration::updateValue('BLOCKSOCIAL_PINTEREST', Tools::getValue('blocksocial_pinterest', ''));
             Configuration::updateValue('BLOCKSOCIAL_VIMEO', Tools::getValue('blocksocial_vimeo', ''));
             Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', Tools::getValue('blocksocial_instagram', ''));
+			Configuration::updateValue('BLOCKSOCIAL_LINKEDIN', Tools::getValue('blocksocial_linkedin', ''));
             $this->_clearCache('blocksocial.tpl');
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules').'&configure='.$this->name.'&tab_module='.$this->tab.'&conf=4&module_name='.$this->name);
         }
@@ -150,6 +153,12 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                         'name' => 'blocksocial_instagram',
                         'desc' => $this->getTranslator()->trans('Your official Instagram account.', array(), 'Modules.SocialFollow.Admin'),
                     ),
+					array(
+                        'type' => 'text',
+                        'label' => $this->getTranslator()->trans('Linkedin URL:', array(), 'Modules.SocialFollow.Admin'),
+                        'name' => 'blocksocial_linkedin',
+                        'desc' => $this->getTranslator()->trans('Your official Linkedin account.', array(), 'Modules.SocialFollow.Admin'),
+                    ),
                 ),
                 'submit' => array(
                     'title' => $this->getTranslator()->trans('Save', array(), 'Admin.Global'),
@@ -178,6 +187,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             'blocksocial_pinterest' => Tools::getValue('blocksocial_pinterest', Configuration::get('BLOCKSOCIAL_PINTEREST')),
             'blocksocial_vimeo' => Tools::getValue('blocksocial_vimeo', Configuration::get('BLOCKSOCIAL_VIMEO')),
             'blocksocial_instagram' => Tools::getValue('blocksocial_instagram', Configuration::get('BLOCKSOCIAL_INSTAGRAM')),
+			'blocksocial_linkedin' => Tools::getValue('blocksocial_linkedin', Configuration::get('BLOCKSOCIAL_LINKEDIN')),
         );
     }
 
@@ -255,6 +265,14 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                 'label' => $this->getTranslator()->trans('Instagram', array(), 'Modules.SocialFollow.Shop'),
                 'class' => 'instagram',
                 'url' => Configuration::get('BLOCKSOCIAL_INSTAGRAM'),
+            ];
+        }
+		
+		if (Configuration::get('BLOCKSOCIAL_LINKEDIN')) {
+            $social_links['linkedin'] = [
+                'label' => $this->getTranslator()->trans('Linkedin', array(), 'Modules.SocialFollow.Shop'),
+                'class' => 'linkedin',
+                'url' => Configuration::get('BLOCKSOCIAL_LINKEDIN'),
             ];
         }
 
