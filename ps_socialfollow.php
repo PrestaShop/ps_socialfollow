@@ -35,7 +35,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
     public function __construct()
     {
         $this->name = 'ps_socialfollow';
-        $this->version = '1.0.0';
+        $this->version = '1.0.2';
         $this->author = 'PrestaShop';
 
         $this->bootstrap = true;
