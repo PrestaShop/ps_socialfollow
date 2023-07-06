@@ -4,6 +4,10 @@
 
 Facebook, Twitter, let your customers know where to follow you and increase your community.
 
+## Compatibility
+
+PrestaShop: `1.7.4.0` or later
+
 ## Multistore compatibility
 
 This module is compatible with multistore ✔
