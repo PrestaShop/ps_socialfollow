@@ -4,6 +4,10 @@
 
 Facebook, Twitter, let your customers know where to follow you and increase your community.
 
+## Compatibility
+
+PrestaShop: `1.7.4.0` or later
+
 ## Multistore compatibility
 
 This module is compatible with multistore ✔
@@ -11,6 +15,12 @@ This module is compatible with multistore ✔
 - It can be configured differently from one store to another.
 - It can be configured quickly in the same way on all stores thanks to the all shops context or using shop groups.
 - It can be activated on one store and deactivated on another
+
+## How to test
+
+Link to specs : https://docs.prestashop-project.org/functional-documentation/functional-documentation/ux-ui/back-office/improve/modules/social-media-follow-links
+
+Add social media links in BO and check in FO that the buttons are well displayed in Homepage.
 
 ## Reporting issues
 
