@@ -47,7 +47,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
         $this->name = 'ps_socialfollow';
         $this->tab = 'advertising_marketing';
         $this->author = 'PrestaShop';
-        $this->version = '2.3.2';
+        $this->version = '2.3.3';
 
         $this->bootstrap = true;
         parent::__construct();
@@ -384,13 +384,16 @@ class Ps_Socialfollow extends Module implements WidgetInterface
      */
     protected function updateFields()
     {
+        $defaultLanguageId = (int) Configuration::get('PS_LANG_DEFAULT');
         $validator = Validation::createValidator();
         $constraints = [new Url()];
         $values = [];
         $errors = [];
         foreach (static::SOCIAL_NETWORKS as $social) {
+            $defaultValue = trim(Tools::getValue("BLOCKSOCIAL_{$social}_{$defaultLanguageId}", ''));
             foreach (Language::getIDs() as $id_lang) {
-                $values[$social][$id_lang] = trim(Tools::getValue("BLOCKSOCIAL_{$social}_{$id_lang}", ''));
+                $value = trim(Tools::getValue("BLOCKSOCIAL_{$social}_{$id_lang}", ''));
+                $values[$social][$id_lang] = $value ? $value : $defaultValue;
                 $violations = $validator->validate($values[$social][$id_lang], $constraints);
 
                 if (count($violations)) {
