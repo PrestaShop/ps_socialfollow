@@ -126,84 +126,17 @@ class Ps_Socialfollow extends Module implements WidgetInterface
 
     public function renderForm()
     {
+        $this->context->controller->addJqueryUI('ui.sortable');
+        $this->context->controller->addJS($this->_path . 'views/js/admin-sortable-fields.js');
+        $this->context->controller->addCSS($this->_path . 'views/css/admin-sortable-fields.css');
+
         $fields_form = [
             'form' => [
                 'legend' => [
                     'title' => $this->trans('Settings', [], 'Admin.Global'),
                     'icon' => 'icon-cogs',
                 ],
-                'input' => [
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Facebook URL', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_FACEBOOK',
-                        'desc' => $this->trans('Your Facebook fan page.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Twitter URL', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_TWITTER',
-                        'desc' => $this->trans('Your official Twitter account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('RSS URL', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_RSS',
-                        'desc' => $this->trans('The RSS feed of your choice (your blog, your store, etc.).', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('YouTube URL', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_YOUTUBE',
-                        'desc' => $this->trans('Your official YouTube account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Pinterest URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_PINTEREST',
-                        'desc' => $this->trans('Your official Pinterest account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Vimeo URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_VIMEO',
-                        'desc' => $this->trans('Your official Vimeo account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Instagram URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_INSTAGRAM',
-                        'desc' => $this->trans('Your official Instagram account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('LinkedIn URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_LINKEDIN',
-                        'desc' => $this->trans('Your official LinkedIn account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('TikTok URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_TIKTOK',
-                        'desc' => $this->trans('Your official TikTok account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                    [
-                        'type' => 'text',
-                        'lang' => true,
-                        'label' => $this->trans('Discord URL:', [], 'Modules.Socialfollow.Admin'),
-                        'name' => 'BLOCKSOCIAL_DISCORD',
-                        'desc' => $this->trans('Your official Discord account.', [], 'Modules.Socialfollow.Admin'),
-                    ],
-                ],
+                'input' => $this->getFormInputs(),
                 'submit' => [
                     'title' => $this->trans('Save', [], 'Admin.Global'),
                 ],
@@ -224,9 +157,137 @@ class Ps_Socialfollow extends Module implements WidgetInterface
         return $helper->generateForm([$fields_form]);
     }
 
+    protected function getFormInputs()
+    {
+        $inputs = [
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Facebook URL', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_FACEBOOK',
+                'desc' => $this->trans('Your Facebook fan page.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Twitter URL', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_TWITTER',
+                'desc' => $this->trans('Your official Twitter account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('RSS URL', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_RSS',
+                'desc' => $this->trans('The RSS feed of your choice (your blog, your store, etc.).', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('YouTube URL', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_YOUTUBE',
+                'desc' => $this->trans('Your official YouTube account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Pinterest URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_PINTEREST',
+                'desc' => $this->trans('Your official Pinterest account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Vimeo URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_VIMEO',
+                'desc' => $this->trans('Your official Vimeo account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Instagram URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_INSTAGRAM',
+                'desc' => $this->trans('Your official Instagram account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('LinkedIn URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_LINKEDIN',
+                'desc' => $this->trans('Your official LinkedIn account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('TikTok URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_TIKTOK',
+                'desc' => $this->trans('Your official TikTok account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'text',
+                'lang' => true,
+                'label' => $this->trans('Discord URL:', [], 'Modules.Socialfollow.Admin'),
+                'name' => 'BLOCKSOCIAL_DISCORD',
+                'desc' => $this->trans('Your official Discord account.', [], 'Modules.Socialfollow.Admin'),
+            ],
+            [
+                'type' => 'hidden',
+                'name' => 'BLOCKSOCIAL_FIELDS_ORDER',
+            ],
+        ];
+
+        $inputs = $this->applySocialLinksOrder($inputs, true);
+
+        $inputs[] = [
+            'type' => 'hidden',
+            'name' => 'BLOCKSOCIAL_FIELDS_ORDER',
+        ];
+
+        return $inputs;
+    }
+
+    /**
+     * Applies the saved social links order (BLOCKSOCIAL_FIELDS_ORDER) to either the configuration form inputs
+     * or the front-office social links array, keeping any non-ordered items at the end.
+     */
+    protected function applySocialLinksOrder(array $items, $isAdminForm = false): array
+    {
+        $order = array_values(array_filter(array_map('trim', explode(',', (string) Configuration::get('BLOCKSOCIAL_FIELDS_ORDER')))));
+
+        if (!empty($order)) {
+            $indexed = [];
+            foreach ($items as $index => $item) {
+                $key = $isAdminForm ? (string) ($item['name'] ?? '') : (string) $index;
+                if ($key !== '') {
+                    $indexed[$key] = $item;
+                }
+            }
+
+            $sorted = [];
+
+            foreach ($order as $name) {
+                if ($isAdminForm) {
+                    $name = 'BLOCKSOCIAL_' . strtoupper($name);
+                }
+
+                if (isset($indexed[$name])) {
+                    $sorted[] = $indexed[$name];
+                    unset($indexed[$name]);
+                }
+            }
+
+            $items = array_merge($sorted, array_values($indexed));
+        }
+
+        return $items;
+    }
+
     public function getConfigFieldsValues()
     {
-        $result = [];
+        $result = [
+            'BLOCKSOCIAL_FIELDS_ORDER' => (string) Configuration::get('BLOCKSOCIAL_FIELDS_ORDER'),
+        ];
+
         foreach (static::SOCIAL_NETWORKS as $social) {
             $configuration_name = "BLOCKSOCIAL_$social";
             if (!empty(Configuration::get($configuration_name))) {
@@ -362,6 +423,10 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             ];
         }
 
+        if (!empty($social_links)) {
+            $social_links = $this->applySocialLinksOrder($social_links, false);
+        }
+
         return [
             'social_links' => $social_links,
         ];
@@ -406,6 +471,22 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             foreach (static::SOCIAL_NETWORKS as $social) {
                 Configuration::updateValue("BLOCKSOCIAL_$social", $values[$social]);
             }
+
+            $order = Tools::getValue('BLOCKSOCIAL_FIELDS_ORDER', '');
+
+            if (!empty($order)) {
+                $items = array_filter(array_map('trim', explode(',', $order)));
+
+                $normalized = array_map(function ($item) {
+                    $item = preg_replace('/^BLOCKSOCIAL_/', '', $item);
+
+                    return strtolower($item);
+                }, $items);
+
+                $order = implode(',', $normalized);
+            }
+
+            Configuration::updateValue('BLOCKSOCIAL_FIELDS_ORDER', pSQL($order));
 
             return true;
         }
