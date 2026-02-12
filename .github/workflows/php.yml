@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        presta-versions: ['8.1.7', '8.2.4', '9.0.3', 'latest']
+        presta-versions: ['8.1', '8.2', '9.0.3', 'latest']
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
