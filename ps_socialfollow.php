@@ -250,14 +250,14 @@ class Ps_Socialfollow extends Module implements WidgetInterface
      * Applies the saved social links order (BLOCKSOCIAL_FIELDS_ORDER) to either the configuration form inputs
      * or the front-office social links array, keeping any non-ordered items at the end.
      */
-    protected function applySocialLinksOrder(array $items, $isAdminForm = false): array
+    protected function applySocialLinksOrder(array $items, $isAdminForm = false)
     {
         $order = array_values(array_filter(array_map('trim', explode(',', (string) Configuration::get('BLOCKSOCIAL_FIELDS_ORDER')))));
 
         if (!empty($order)) {
             $indexed = [];
             foreach ($items as $index => $item) {
-                $key = $isAdminForm ? (string) ($item['name'] ?? '') : (string) $index;
+                $key = $isAdminForm ? (string) (isset($item['name']) ? $item['name'] : '') : (string) $index;
                 if ($key !== '') {
                     $indexed[$key] = $item;
                 }
