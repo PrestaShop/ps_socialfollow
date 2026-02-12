@@ -55,7 +55,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
         $this->displayName = $this->trans('Social media follow links', [], 'Modules.Socialfollow.Admin');
         $this->description = $this->trans('Facebook, Twitter, let your customers know where to follow you and increase your community.', [], 'Modules.Socialfollow.Admin');
 
-        $this->ps_versions_compliancy = ['min' => '1.7.4.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '8.1.0', 'max' => _PS_VERSION_];
 
         $this->templateFile = 'module:ps_socialfollow/ps_socialfollow.tpl';
     }
