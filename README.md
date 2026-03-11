@@ -6,7 +6,7 @@ Facebook, Twitter, let your customers know where to follow you and increase your
 
 ## Compatibility
 
-PrestaShop: `1.7.4.0` or later
+PrestaShop: `8.1.0` or later
 
 ## Multistore compatibility
 
