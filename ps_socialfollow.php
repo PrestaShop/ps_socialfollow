@@ -53,7 +53,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
         parent::__construct();
 
         $this->displayName = $this->trans('Social media follow links', [], 'Modules.Socialfollow.Admin');
-        $this->description = $this->trans('Facebook, Twitter, let your customers know where to follow you and increase your community.', [], 'Modules.Socialfollow.Admin');
+        $this->description = $this->trans('Facebook, X, let your customers know where to follow you and increase your community.', [], 'Modules.Socialfollow.Admin');
 
         $this->ps_versions_compliancy = ['min' => '8.1.0', 'max' => _PS_VERSION_];
 
@@ -170,9 +170,9 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             [
                 'type' => 'text',
                 'lang' => true,
-                'label' => $this->trans('Twitter URL', [], 'Modules.Socialfollow.Admin'),
+                'label' => $this->trans('X URL', [], 'Modules.Socialfollow.Admin'),
                 'name' => 'BLOCKSOCIAL_TWITTER',
-                'desc' => $this->trans('Your official Twitter account.', [], 'Modules.Socialfollow.Admin'),
+                'desc' => $this->trans('Your official X account.', [], 'Modules.Socialfollow.Admin'),
             ],
             [
                 'type' => 'text',
