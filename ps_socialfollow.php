@@ -271,12 +271,20 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                 }
 
                 if (isset($indexed[$name])) {
-                    $sorted[] = $indexed[$name];
+                    if ($isAdminForm) {
+                        $sorted[] = $indexed[$name];
+                    } else {
+                        $sorted[$name] = $indexed[$name];
+                    }
                     unset($indexed[$name]);
                 }
             }
 
-            $items = array_merge($sorted, array_values($indexed));
+            if ($isAdminForm) {
+                $items = array_merge($sorted, array_values($indexed));
+            } else {
+                $items = $sorted + $indexed;
+            }
         }
 
         return $items;
